@@ -20,6 +20,18 @@
     </div>
 {% endif %}
 
+
+{% if request.args.get("work") == "search" and request.args.get("return") == "qn" %}
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">검색어를 입력해주세요!</h4>
+    </div>
+{% elif request.args.get("work") == "search" and request.args.get("return") == "rn" %}
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">검색 결과가 없습니다...</h4>
+    </div>
+{% endif %}
+
+
     <ul style="padding-left:0">
     {% for post in context.items %}
         <li class="list-group-item">

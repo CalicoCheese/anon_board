@@ -27,10 +27,10 @@
                             <a class="nav-link" href="{{ url_for('post.write') }}">글 쓰기</a>
                         </li>
                     </ul>
-<!--                    <form class="d-flex" action="">-->
-<!--                        <input class="form-control me-2" type="search" name="search" placeholder="검색어">-->
-<!--                        <button class="btn btn-outline-primary" type="submit">🔍</button>-->
-<!--                    </form>-->
+                    <form class="d-flex" action="{{ url_for('search.search') }}">
+                        <input class="form-control me-2" type="search" name="query" placeholder="검색어">
+                        <button class="btn btn-outline-primary" type="submit">🔍</button>
+                    </form>
                 </div>
             </div>
         </nav>

@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <ul style="padding-left:0">
+    {% for post in context %}
+        <li class="list-group-item">
+            <label for="post_{{ post.idx }}" class="col-sm-1">{{ post.idx }}</label>
+            <a href="{{ url_for('post.read', idx=post.idx) }}" id="post_{{ post.idx }}" class="btn btn-link">{{ post.title }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}
