@@ -1,5 +1,10 @@
 {% extends 'layout.html' %}
 {% block content %}
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">정보</h4>
+        <p class="mb-0">검색 결과는 <b>30개</b> 까지만 나옵니다</p>
+    </div>
+
     <ul style="padding-left:0">
     {% for post in context %}
         <li class="list-group-item">
