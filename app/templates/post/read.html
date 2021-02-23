@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="mb-3 row">
+        <label for="title" class="col-sm-2 h3">제목</label>
+        <div class="col-sm-10">
+            <span id="title" class="h3">{{ ctx.title }}</span>
+        </div>
+
+        <label for="date" class="col-sm-2 h5">작성일</label>
+        <div class="col-sm-10">
+            <span id="date" class="h5">{{ ctx.date }}</span>
+        </div>
+    </div>
+
+    <textarea id="text" name="text">{{ ctx.text }}</textarea>
+
+    <div>
+        <!--    <button class="btn btn-warning">게시글 수정하기</button>-->
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete">게시글 삭제하기</button>
+    </div>
+    <hr>
+
+    <div class="input-group mb-3">
+        <label for="cm_password" class="input-group-text">댓글 비밀번호</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" id="cm_password">
+        </div>
+    </div>
+    <div class="input-group mb-3">
+        <button class="btn btn-outline-primary" id="cm_send">댓글 쓰기</button>
+        <textarea class="form-control" id="cm_content"></textarea>
+    </div>
+
+    <ul id="comment" style="padding-left:0"></ul>
+{% endblock %}
+{% block modal %}
+    <div class="modal fade" id="delete" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">비밀번호를 입력해주세요</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form method="post" action="{{ url_for('post.delete', idx=ctx.idx) }}">
+                    <div class="modal-body">
+                        <input type="password" class="form-control" id="password">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                        <button type="submit" class="btn btn-primary">삭제하기</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+        new SimpleMDE({
+            element: document.getElementById("text"),
+            spellChecker: false,
+            toolbar: false
+        }).togglePreview();
+
+        const idx = {{ ctx.idx }};
+    </script>
+    <script src="{{ url_for('static', filename='js/comment.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /$
+Allow: /static
+Allow: /post
+Disallow: /
+Disallow: /comment

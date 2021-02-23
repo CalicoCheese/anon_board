@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>{{ g.title }}</title>
+
+        <meta name="author" content="chick_0">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+    {% if g.use_markdown == true %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/simplemde.min.css') }}">
+        <script src="{{ url_for('static', filename='js/simplemde.min.js') }}"></script>
+    {% endif %}
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light container">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ url_for('index.index') }}">📝</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('post.write') }}">글 쓰기</a>
+                        </li>
+                    </ul>
+<!--                    <form class="d-flex" action="">-->
+<!--                        <input class="form-control me-2" type="search" name="search" placeholder="검색어">-->
+<!--                        <button class="btn btn-outline-primary" type="submit">🔍</button>-->
+<!--                    </form>-->
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+
+        <footer style="padding:60px;">
+        </footer>
+
+        {% block modal %}{% endblock %}
+
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        {% block script %}{% endblock %}
+    </body>
+</html>

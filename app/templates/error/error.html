@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">{{ title }}</h4>
+        <p>{{ message }}</p>
+        <hr>
+        <p class="mb-0"><a class="btn btn-primary" href="{{ url_for('index.index') }}">메인 화면으로 돌아가기</a></p>
+    </div>
+{% endblock %}

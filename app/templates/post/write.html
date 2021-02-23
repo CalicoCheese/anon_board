@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="alert alert-primary" role="alert">
+        <h4 class="alert-heading">지켜주세요</h4>
+        <ol>
+            <li>상대방도 나와 같이 인격을 가진 인간임을 기억합니다.</li>
+            <li>실제 생활에서 적용되는 기준으로 행동합니다.</li>
+            <li>다른 사람의 사생활을 존중합니다.</li>
+            <li>자신의 권력을 함부로 사용하지 않습니다.</li>
+        </ol>
+    </div>
+
+{% if request.args.get("missing") == "title" %}
+    <div class="alert alert-danger" role="alert">
+        게시글의 <b>제목</b>을 입력해야 합니다
+    </div>
+{% elif request.args.get("missing") == "text" %}
+    <div class="alert alert-danger" role="alert">
+        게시글의 <b>내용</b>을 입력해야 합니다
+    </div>
+{% elif request.args.get("missing") == "password" %}
+    <div class="alert alert-danger" role="alert">
+        게시글의 <b>비밀번호</b>를 입력해야 합니다
+    </div>
+{% endif %}
+
+{% if request.args.get("wrong") == "csrf" %}
+    <div class="alert alert-warning" role="alert">
+        게시글의 작성하는데 오류가 발생했습니다
+    </div>
+{% endif %}
+
+
+    <form method="post" action="{{ url_for('post.write') }}">
+        <div class="mb-3 row">
+            <label for="title" class="col-sm-2 col-form-label">제목</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="title" id="title">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="password" class="col-sm-2 col-form-label">비밀번호</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" name="password" id="password">
+            </div>
+        </div>
+
+        <textarea id="text" name="text">{{ g.text }}</textarea>
+
+        <hr>
+
+        <button class="btn btn-lg btn-primary" type="submit" id="submit">작성 & 공개하기</button>
+        <input hidden="hidden" readonly="readonly" name="csrf_token" value="{{ csrf_token }}">
+    </form>
+
+
+
+{% endblock %}
+{% block script %}
+    <script>
+        new SimpleMDE({
+            element: document.getElementById("text"),
+            spellChecker: false
+        });
+    </script>
+{% endblock %}

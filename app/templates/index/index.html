@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+{% if request.args.get("work") == "write" and request.args.get("idx") is not none %}
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">글을 작성했습니다!</h4>
+        <p class="mb-0">
+            <a class="btn btn-primary" href="{{ url_for('post.read', idx=request.args.get('idx')) }}">글 보러가기</a>
+        </p>
+    </div>
+{% endif %}
+
+{% if request.args.get("work") == "delete" and request.args.get("return") == "ok" %}
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">글을 삭제했습니다!</h4>
+    </div>
+{% elif request.args.get("work") == "delete" and request.args.get("return") == "fail" %}
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">삭제할 글을 찾지 못했습니다...</h4>
+    </div>
+{% endif %}
+
+    <ul style="padding-left:0">
+    {% for post in context.items %}
+        <li class="list-group-item">
+            <label for="post_{{ post.idx }}" class="col-sm-1">{{ post.idx }}</label>
+            <a href="{{ url_for('post.read', idx=post.idx) }}" id="post_{{ post.idx }}" class="btn btn-link">{{ post.title }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+
+    <br><br>
+
+    <div style="text-align:center;">
+        <div>
+        {% if context.prev_num is not none %}
+            <a class="btn btn-warning" href="{{ url_for('index.index') }}?page={{ context.prev_num }}">이전 페이지</a>
+        {% else %}
+            <a class="btn btn-outline-warning" href="javascript:alert('이전 페이지가 없습니다')">이전 페이지</a>
+        {% endif %}
+        {% if context.next_num is not none %}
+            <a class="btn btn-primary" href="{{ url_for('index.index') }}?page={{ context.next_num }}">다음 페이지</a>
+        {% else %}
+            <a class="btn btn-outline-primary" href="javascript:alert('다음 페이지가 없습니다')">다음 페이지</a>
+        {% endif %}
+        </div>
+
+        <b>{{ context.page }}/{{ context.pages }}</b>
+    </div>
+
+{% endblock %}
