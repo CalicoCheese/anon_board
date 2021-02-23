@@ -12,26 +12,26 @@
         </div>
     </div>
 
-    <textarea id="text" name="text">{{ ctx.text }}</textarea>
+    <textarea id="text" name="text" style="height:auto;">{{ ctx.text }}</textarea>
 
     <div>
-        <!--    <button class="btn btn-warning">게시글 수정하기</button>-->
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete">게시글 삭제하기</button>
     </div>
+
+    <hr>
+    <ul id="comment" style="padding-left:0"></ul>
     <hr>
 
-    <div class="input-group mb-3">
-        <label for="cm_password" class="input-group-text">댓글 비밀번호</label>
-        <div class="col-sm-10">
-            <input type="password" class="form-control" id="cm_password">
-        </div>
-    </div>
     <div class="input-group mb-3">
         <button class="btn btn-outline-primary" id="cm_send">댓글 쓰기</button>
         <textarea class="form-control" id="cm_content"></textarea>
     </div>
-
-    <ul id="comment" style="padding-left:0"></ul>
+    <div class="input-group mb-3">
+        <label for="cm_password" class="input-group-text">댓글 비밀번호</label>
+        <div class="col-sm-3">
+            <input type="password" class="form-control" id="cm_password">
+        </div>
+    </div>
 {% endblock %}
 {% block modal %}
     <div class="modal fade" id="delete" tabindex="-1">
@@ -56,13 +56,14 @@
 {% endblock %}
 {% block script %}
     <script>
+        const idx = {{ ctx.idx }};
+        const textarea = document.getElementById("text");
+
         new SimpleMDE({
-            element: document.getElementById("text"),
+            element: textarea,
             spellChecker: false,
             toolbar: false
         }).togglePreview();
-
-        const idx = {{ ctx.idx }};
     </script>
     <script src="{{ url_for('static', filename='js/comment.js') }}"></script>
 {% endblock %}
