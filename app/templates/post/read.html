@@ -22,14 +22,16 @@
     <ul id="comment" style="padding-left:0"></ul>
     <hr>
 
-    <div class="input-group mb-3">
-        <button class="btn btn-outline-primary" id="cm_send">댓글 쓰기</button>
-        <textarea class="form-control" id="cm_content"></textarea>
-    </div>
-    <div class="input-group mb-3">
-        <label for="cm_password" class="input-group-text">댓글 비밀번호</label>
-        <div class="col-sm-3">
-            <input type="password" class="form-control" id="cm_password">
+    <div id="comment_tool">
+        <div class="input-group mb-3">
+            <button class="btn btn-outline-primary" id="cm_send">댓글 쓰기</button>
+            <textarea class="form-control" id="cm_content"></textarea>
+        </div>
+        <div class="input-group mb-3">
+            <label for="cm_password" class="input-group-text">댓글 비밀번호</label>
+            <div class="col-sm-3">
+                <input type="password" class="form-control" id="cm_password">
+            </div>
         </div>
     </div>
 {% endblock %}

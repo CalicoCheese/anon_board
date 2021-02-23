@@ -83,6 +83,14 @@ function render(){
             }
         });
     }
+
+
+    if(cm_list.length < 30){
+        document.getElementById("comment_tool").setAttribute("style", "visibility: visible;");
+    }
+    else{
+        document.getElementById("comment_tool").setAttribute("style", "visibility: hidden;");
+    }
 }
 
 /* * * * * * * * * * * * * * * * * * */
