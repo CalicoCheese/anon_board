@@ -60,6 +60,8 @@ def write():
         db.session.add(ctx)
         db.session.commit()
 
+        del session['csrf_token']
+
         return redirect(url_for("index.index") + f"?work=write&idx={ctx.idx}")
 
 
